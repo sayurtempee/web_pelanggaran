@@ -172,21 +172,35 @@
   <?php endif; ?>
 
   <!-- Floating Bubble Group -->
-  <?php if (!isset($_SESSION['guru'])): ?>
-    <div class="fixed bottom-4 right-4 z-50">
-      <div id="floating-actions" class="flex flex-col items-end space-y-3 mb-3 opacity-0 invisible transition-all duration-300 transform translate-y-4">
-        <button id="toggle-dark" class="w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 shadow-lg flex items-center justify-center hover:scale-110 transition" title="Toggle Dark Mode">
-          <i id="dark-icon" class="bi bi-moon-fill"></i>
+  <div class="fixed bottom-4 right-4 z-50">
+    <div id="floating-actions" class="flex flex-col items-end space-y-1.5 mb-3 opacity-0 invisible transition-all duration-300 transform translate-y-4">
+      <!-- Toggle Dark Mode -->
+      <button id="toggle-dark" class="w-12 h-12 rounded-full bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 shadow-lg flex items-center justify-center hover:scale-110 transition" title="Toggle Dark Mode">
+        <i id="dark-icon" class="bi bi-moon-fill"></i>
+      </button>
+
+      <!-- Login Guru -->
+      <?php if (isset($_SESSION['guru'])): ?>
+        <button onclick="openGuruModal(true)" class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center hover:scale-110 transition" title="Login Guru">
+          <i class="bi bi-person-fill-lock"></i>
         </button>
+      <?php else: ?>
         <button onclick="openGuruModal()" class="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg flex items-center justify-center hover:scale-110 transition" title="Login Guru">
           <i class="bi bi-person-fill-lock"></i>
         </button>
-      </div>
-      <button onclick="toggleFloatingActions()" class="w-14 h-14 rounded-full bg-primary hover:bg-blue-800 text-white shadow-xl flex items-center justify-center transition-all duration-300 focus:outline-none">
-        <i id="toggle-menu-icon" class="bi bi-plus-lg text-xl"></i>
+      <?php endif; ?>
+
+      <!-- Refresh Page -->
+      <button onclick="location.reload()" class="w-12 h-12 rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg flex items-center justify-center hover:scale-110 transition" title="Refresh Page">
+        <i class="bi bi-arrow-clockwise"></i>
       </button>
     </div>
-  <?php endif; ?>
+
+    <!-- Main Floating Button -->
+    <button onclick="toggleFloatingActions()" class="w-14 h-14 rounded-full bg-primary hover:bg-blue-800 text-white shadow-xl flex items-center justify-center transition-all duration-300 focus:outline-none">
+      <i id="toggle-menu-icon" class="bi bi-plus-lg text-xl"></i>
+    </button>
+  </div>
 
   <!-- Modal login & register guru -->
   <?php include 'layouts/auth-modal.php'; ?>
@@ -270,6 +284,7 @@
               <option value="xii_anm_2">XII ANM 2</option>
             </select>
           </div>
+          <!-- Jurusan -->
           <div class="mt-4">
             <label for="jurusan" class="block font-medium text-sm text-gray-700 dark:text-gray-200">Jurusan</label>
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Masukkan sesuai dengan jurusannya</p>
@@ -306,24 +321,32 @@
 
               <select id="pelanggaran" name="pelanggaran[]" multiple required
                 class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-900 dark:text-white rounded-lg px-4 py-2 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary">
-                <option value="Membolos">Bolos Sekolah</option>
-                <option value="Tidak Menggunakan Almet">Tidak Menggunakan Almet</option>
-                <option value="Terlambat">Datang Terlambat</option>
-                <option value="Tidak Memakai Seragam">Tidak Memakai Seragam</option>
-                <option value="Rambut Tidak Rapi">Rambut Tidak Rapi</option>
-                <option value="Merokok">Merokok</option>
-                <option value="Membawa Barang Terlarang">Membawa Barang Terlarang</option>
-                <option value="Berkelahi / Tawuran">Berkelahi / Tawuran</option>
-                <option value="Berkata Kasar">Berkata Kasar</option>
-                <option value="Membuat Keributan di Kelas">Membuat Keributan di Kelas</option>
-                <option value="Merusak Fasilitas Sekolah">Merusak Fasilitas Sekolah</option>
-                <option value="Tidak Mengerjakan Tugas">Tidak Mengerjakan Tugas</option>
-                <option value="Keluyuran Saat Jam Pelajaran">Keluyuran Saat Jam Pelajaran</option>
-                <option value="Tidak Mengikuti Upacara">Tidak Mengikuti Upacara</option>
-                <option value="Keluar Kelas Tanpa Izin">Keluar Kelas Tanpa Izin</option>
-                <option value="Pacaran di Lingkungan Sekolah">Pacaran di Lingkungan Sekolah</option>
-                <option value="Bullying / Menghina Teman">Bullying / Menghina Teman</option>
-                <option value="Makan di Kelas Saat Pelajaran">Makan di Kelas Saat Pelajaran</option>
+                <option value="membolos">Bolos Sekolah</option>
+                <option value="tidak-menggunakan-almet">Tidak Menggunakan Almet</option>
+                <option value="tidak-menggunakan-name-tag">Tidak Menggunakan Name Tag</option>
+                <option value="tidak-menggunakan-topi">Tidak Menggunakan Topi</option>
+                <option value="tidak-menggunakan-gesper">Tidak Menggunakan Gesper</option>
+                <option value="tidak-membawa-alqur'an">Tidak Menggunakan Al - Qur'an</option>
+                <option value="menggunakan-kaos-kaki-putih">Menggunakan Kaos Kaki Putih</option>
+                <option value="menggunakan-kaos-kaki-hitam">Menggunakan Kaos Kaki Hitam</option>
+                <option value="menggunakan-kaos-kaki-pendek">Menggunakan Kaos Kaki Pendek</option>
+                <option value="tidak-menggunakan-bet-nama">Tidak Menggunakan Bet Nama</option>
+                <option value="tidak-menggunakan-bet-sekolah">Tidak Menggunakan Bet Sekolah</option>
+                <option value="tidak-menggunakan-seragam-lengkap">Tidak Menggunakan Seragam Lengkap</option>
+                <option value="tidak-menggunakan-seragam-olahraga">Tidak Menggunakan Seragam Olahraga</option>
+                <option value="terlambat">Datang Terlambat</option>
+                <option value="tidak-memakai-seragam">Tidak Memakai Seragam</option>
+                <option value="rambut-tidak-rapi">Rambut Tidak Rapi</option>
+                <option value="ketauan-merokok">Ketauan Merokok</option>
+                <option value="membawa-barang-terlarang">Membawa Barang Terlarang</option>
+                <option value="berkelahi / tawuran">Berkelahi / Tawuran</option>
+                <option value="berkata-kasar">Berkata Kasar</option>
+                <option value="membuat-keributan-di-kelas">Membuat Keributan di Kelas</option>
+                <option value="merusak-fasilitas-sekolah">Merusak Fasilitas Sekolah</option>
+                <option value="keluyuran-saat-jam-pelajaran">Keluyuran Saat Jam Pelajaran</option>
+                <option value="tidak-mengikuti-upacara">Tidak Mengikuti Upacara</option>
+                <option value="keluar-sekolah-tanpa-izin">Keluar Sekolah Tanpa Izin</option>
+                <option value="bullying / menghina-teman">Bullying / Menghina Teman</option>
               </select>
             </div>
           </div>
@@ -348,19 +371,25 @@
           <a href="export_all.php" id="exportAll" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
             <i class="bi bi-download"></i> Unduh Semua Data
           </a>
-          <a href="export_monthly.php" id="exportMonthly" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
-            <i class="bi bi-calendar-check"></i> Unduh Rekap Bulanan
-          </a>
+          <form action="export_monthly.php" method="GET" target="_blank" class="mt-6">
+            <input type="hidden" name="kelas" id="kelasExport">
+            <input type="hidden" name="jurusan" id="jurusanExport">
+
+            <button type="submit"
+              class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-xl shadow transition duration-200">
+              <i class="bi bi-calendar-check"></i> Unduh Rekap Bulanan
+            </button>
+          </form>
         </div>
       </div>
     <?php endif; ?>
   </div>
 
   <!-- Tabel Data -->
-  <div class="bg-white dark:bg-gray-800 mt-6 p-6 rounded-2xl shadow-md w-full max-w-6xl mx-auto">
-    <h3 class="text-xl font-semibold mb-4 text-center md:text-left">Daftar Siswa Melakukan Pelanggaran</h3>
+  <?php if (isset($_SESSION['guru'])): ?>
+    <div class="bg-white dark:bg-gray-800 mt-6 p-6 rounded-2xl shadow-md w-full max-w-6xl mx-auto">
+      <h3 class="text-xl font-semibold mb-4 text-center md:text-left">Daftar Siswa Melakukan Pelanggaran</h3>
 
-    <?php if (isset($_SESSION['guru'])): ?>
       <div class="w-full flex justify-center md:justify-start">
         <form action="delete.php" method="POST" onsubmit="return confirm('Yakin ingin menghapus semua data?')">
           <button type="submit" class="mb-4 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition">
@@ -368,86 +397,86 @@
           </button>
         </form>
       </div>
-    <?php endif; ?>
 
-    <div class="overflow-x-auto">
-      <table class="min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-600">
-        <thead class="bg-primary dark:bg-blue-900 text-white">
-          <tr>
-            <th class="px-4 py-2 text-left">No</th>
-            <th class="px-4 py-2 text-left">Nama</th>
-            <th class="px-4 py-2 text-left">Kelas</th>
-            <th class="px-4 py-2 text-left">Tanggal</th>
-            <th class="px-4 py-2 text-left">Pelanggaran</th>
-            <th class="px-4 py-2 text-left">Keterangan</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
-          <?php
-          include 'connection.php';
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm divide-y divide-gray-200 dark:divide-gray-600">
+          <thead class="bg-primary dark:bg-blue-900 text-white">
+            <tr>
+              <th class="px-4 py-2 text-left">No</th>
+              <th class="px-4 py-2 text-left">Nama</th>
+              <th class="px-4 py-2 text-left">Kelas</th>
+              <th class="px-4 py-2 text-left">Tanggal</th>
+              <th class="px-4 py-2 text-left">Pelanggaran</th>
+              <th class="px-4 py-2 text-left">Keterangan</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+            <?php
+            include 'connection.php';
 
-          // Array bulan Indonesia
-          $bulanIndonesia = [
-            1 => 'januari',
-            2 => 'februari',
-            3 => 'maret',
-            4 => 'april',
-            5 => 'mei',
-            6 => 'juni',
-            7 => 'juli',
-            8 => 'agustus',
-            9 => 'september',
-            10 => 'oktober',
-            11 => 'november',
-            12 => 'desember'
-          ];
+            // Array bulan Indonesia
+            $bulanIndonesia = [
+              1 => 'januari',
+              2 => 'februari',
+              3 => 'maret',
+              4 => 'april',
+              5 => 'mei',
+              6 => 'juni',
+              7 => 'juli',
+              8 => 'agustus',
+              9 => 'september',
+              10 => 'oktober',
+              11 => 'november',
+              12 => 'desember'
+            ];
 
-          $data = $conn->query("SELECT * FROM pelanggaran ORDER BY tanggal DESC");
-          $no = 1;
+            $data = $conn->query("SELECT * FROM pelanggaran ORDER BY tanggal DESC");
+            $no = 1;
 
-          if ($data->num_rows > 0) {
-            while ($row = $data->fetch_assoc()) {
-              // Format tanggal
-              $tgl = strtotime($row['tanggal']);
-              $tanggal = date('d', $tgl);
-              $bulan = $bulanIndonesia[(int)date('m', $tgl)];
-              $tahun = date('Y', $tgl);
-              $tanggalFormat = "{$tanggal} {$bulan} {$tahun}";
+            if ($data->num_rows > 0) {
+              while ($row = $data->fetch_assoc()) {
+                // Format tanggal
+                $tgl = strtotime($row['tanggal']);
+                $tanggal = date('d', $tgl);
+                $bulan = $bulanIndonesia[(int)date('m', $tgl)];
+                $tahun = date('Y', $tgl);
+                $tanggalFormat = "{$tanggal} {$bulan} {$tahun}";
 
-              echo "<tr class='bg-white dark:bg-gray-900'>
+                echo "<tr class='bg-white dark:bg-gray-900'>
                 <td class='px-4 py-2'>{$no}</td>
                 <td class='px-4 py-2'>{$row['nama']}</td>
                 <td class='px-4 py-2'>" . str_replace('_', ' ', strtoupper($row['kelas'])) . "</td>
                 <td class='px-4 py-2'>{$tanggalFormat}</td>
                 <td class='px-4 py-2'><ul class='list-disc ml-4'>";
-              $pelanggaranItems = explode(',', $row['pelanggaran']);
-              foreach ($pelanggaranItems as $item) {
-                echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
-              }
-              echo "</ul></td>
+                $pelanggaranItems = explode(',', $row['pelanggaran']);
+                foreach ($pelanggaranItems as $item) {
+                  echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
+                }
+                echo "</ul></td>
                 <td class='px-4 py-2'>{$row['keterangan']}</td>
               </tr>";
-              $no++;
+                $no++;
+              }
+            } else {
+              echo "<tr><td colspan='6' class='text-center text-gray-500 dark:text-gray-400 py-4'>Tidak ada data.</td></tr>";
             }
-          } else {
-            echo "<tr><td colspan='6' class='text-center text-gray-500 dark:text-gray-400 py-4'>Tidak ada data.</td></tr>";
-          }
-          ?>
-        </tbody>
-      </table>
+            ?>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
 
-  <?php
-  $bulanLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-  $pelanggaranPerBulan = [];
+    <?php
+    $bulanLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    $pelanggaranPerBulan = [];
 
-  for ($i = 1; $i <= 12; $i++) {
-    $query = $conn->query("SELECT COUNT(*) as total FROM pelanggaran WHERE MONTH(tanggal) = $i AND YEAR(tanggal) = YEAR(CURDATE())");
-    $result = $query->fetch_assoc();
-    $pelanggaranPerBulan[] = $result['total'];
-  }
-  ?>
+    for ($i = 1; $i <= 12; $i++) {
+      $query = $conn->query("SELECT COUNT(*) as total FROM pelanggaran WHERE MONTH(tanggal) = $i AND YEAR(tanggal) = YEAR(CURDATE())");
+      $result = $query->fetch_assoc();
+      $pelanggaranPerBulan[] = $result['total'];
+    }
+    ?>
+  <?php endif; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
   <script>
@@ -496,26 +525,35 @@
     }
 
     // Modal Login/Register
-    function openGuruModal() {
+    // function openGuruModal() {
+    //   document.getElementById('guruAuthModal').classList.remove('hidden');
+    //   showLogin(); // default tampilkan form login
+    //   toggleFloatingActions(); // otomatis tutup bubble
+    // }
+
+    // function closeGuruModal() {
+    //   document.getElementById('guruAuthModal').classList.add('hidden');
+    // }
+
+    // function showLogin() {
+    //   document.getElementById('loginForm').classList.remove('hidden');
+    //   document.getElementById('registerForm').classList.add('hidden');
+    //   document.getElementById('modalTitle').innerText = 'Login Guru';
+    // }
+
+    // function showRegister() {
+    //   document.getElementById('loginForm').classList.add('hidden');
+    //   document.getElementById('registerForm').classList.remove('hidden');
+    //   document.getElementById('modalTitle').innerText = 'Register Guru';
+    // }
+
+    function openGuruModal(showRegisterForm = false) {
       document.getElementById('guruAuthModal').classList.remove('hidden');
-      showLogin(); // default tampilkan form login
-      toggleFloatingActions(); // otomatis tutup bubble
-    }
-
-    function closeGuruModal() {
-      document.getElementById('guruAuthModal').classList.add('hidden');
-    }
-
-    function showLogin() {
-      document.getElementById('loginForm').classList.remove('hidden');
-      document.getElementById('registerForm').classList.add('hidden');
-      document.getElementById('modalTitle').innerText = 'Login Guru';
-    }
-
-    function showRegister() {
-      document.getElementById('loginForm').classList.add('hidden');
-      document.getElementById('registerForm').classList.remove('hidden');
-      document.getElementById('modalTitle').innerText = 'Register Guru';
+      if (showRegisterForm) {
+        showRegister();
+      } else {
+        showLogin();
+      }
     }
 
     // Inisialisasi Chart
@@ -622,6 +660,25 @@
         });
       }
     });
+
+    const kelasInput = document.getElementById('kelas');
+    const jurusanInput = document.getElementById('jurusan');
+
+    const kelasExport = document.getElementById('kelasExport');
+    const jurusanExport = document.getElementById('jurusanExport');
+
+    // Update hidden form input saat ada perubahan
+    function updateExportValues() {
+      kelasExport.value = kelasInput.value;
+      jurusanExport.value = jurusanInput.value;
+    }
+
+    // Event listener saat dropdown berubah
+    kelasInput.addEventListener('change', updateExportValues);
+    jurusanInput.addEventListener('change', updateExportValues);
+
+    // Inisialisasi awal
+    updateExportValues();
   </script>
 
 </body>
